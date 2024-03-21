@@ -12,7 +12,7 @@ export function checkIdMw(req, res, next) {
 
 export function getProductByIdMw(req, res, next){
     var id = req.params.id;
-    var product = DUMMY_PRODUCTS.find(x => x.id === id);
+    var product = DUMMY_PRODUCTS['products'].find(x => x.id === id);
 
     if(!product){
       return res.status(404).send('Product not found');
