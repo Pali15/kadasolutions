@@ -20,7 +20,7 @@ class ProductScreen extends StatelessWidget {
             child: Text(state.errorMessage),
           );
         } else if (state is ProductBlocLoadedProduct) {
-          return Center(child: Text(state.product.description));
+          return Center(child: Text(state.product.id));
         }
 
         return const SizedBox.shrink();

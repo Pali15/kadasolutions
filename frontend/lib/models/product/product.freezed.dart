@@ -26,6 +26,7 @@ mixin _$Product {
   double get percentage => throw _privateConstructorUsedError;
   int get amount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $ProductCopyWith<$Res> {
       double price,
       double percentage,
       int amount,
-      String description});
+      String description,
+      String currency});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? percentage = null,
     Object? amount = null,
     Object? description = null,
+    Object? currency = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -91,6 +94,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -108,7 +115,8 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       double price,
       double percentage,
       int amount,
-      String description});
+      String description,
+      String currency});
 }
 
 /// @nodoc
@@ -128,6 +136,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? percentage = null,
     Object? amount = null,
     Object? description = null,
+    Object? currency = null,
   }) {
     return _then(_$ProductImpl(
       id: null == id
@@ -154,6 +163,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -167,7 +180,8 @@ class _$ProductImpl implements _Product {
       required this.price,
       required this.percentage,
       required this.amount,
-      required this.description});
+      required this.description,
+      required this.currency});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
@@ -184,10 +198,12 @@ class _$ProductImpl implements _Product {
   final int amount;
   @override
   final String description;
+  @override
+  final String currency;
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, price: $price, percentage: $percentage, amount: $amount, description: $description)';
+    return 'Product(id: $id, title: $title, price: $price, percentage: $percentage, amount: $amount, description: $description, currency: $currency)';
   }
 
   @override
@@ -202,13 +218,15 @@ class _$ProductImpl implements _Product {
                 other.percentage == percentage) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, price, percentage, amount, description);
+      runtimeType, id, title, price, percentage, amount, description, currency);
 
   @JsonKey(ignore: true)
   @override
@@ -231,7 +249,8 @@ abstract class _Product implements Product {
       required final double price,
       required final double percentage,
       required final int amount,
-      required final String description}) = _$ProductImpl;
+      required final String description,
+      required final String currency}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
@@ -247,6 +266,8 @@ abstract class _Product implements Product {
   int get amount;
   @override
   String get description;
+  @override
+  String get currency;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>

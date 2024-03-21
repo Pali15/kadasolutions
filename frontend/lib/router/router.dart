@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/bloc/product_event.dart';
 import 'package:frontend/repositories/product_repository.dart';
+import 'package:frontend/router/route_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
 import '../bloc/product_bloc.dart';
@@ -77,16 +78,21 @@ class RoutesBuilder {
     BuildContext context,
     GoRouterState state,
   ) {
-    return const FeedScreen();
+    return const RouteWrapper(
+      child: FeedScreen(),
+    );
   }
 
   Widget productsBuilder(
     BuildContext context,
     GoRouterState state,
   ) {
-    return BlocProvider.value(
-      value: productBloc..add(const LoadProductsEvent()),
-      child: const ProductsScreen(),
+    return RouteWrapper(
+      onInit: () => productBloc.add(const LoadProductsEvent()),
+      child: BlocProvider.value(
+        value: productBloc,
+        child: const ProductsScreen(),
+      ),
     );
   }
 
@@ -95,9 +101,12 @@ class RoutesBuilder {
     GoRouterState state,
   ) {
     final id = (state.extra as Map<String, dynamic>)['id'];
-    return BlocProvider.value(
-      value: productBloc..add(LoadProductEvent(id)),
-      child: const ProductScreen(),
+    return RouteWrapper(
+      onInit: () => productBloc.add(LoadProductEvent(id)),
+      child: BlocProvider.value(
+        value: productBloc,
+        child: const ProductScreen(),
+      ),
     );
   }
 
@@ -105,6 +114,8 @@ class RoutesBuilder {
     BuildContext context,
     GoRouterState state,
   ) {
-    return const ProfileScreen();
+    return const RouteWrapper(
+      child: ProfileScreen(),
+    );
   }
 }

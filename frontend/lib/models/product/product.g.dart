@@ -14,6 +14,7 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       percentage: (json['percentage'] as num).toDouble(),
       amount: json['amount'] as int,
       description: json['description'] as String,
+      currency: json['currency'] as String,
     );
 
 Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'percentage': instance.percentage,
       'amount': instance.amount,
       'description': instance.description,
+      'currency': instance.currency,
     };
 
 _$ProductsImpl _$$ProductsImplFromJson(Map<String, dynamic> json) =>

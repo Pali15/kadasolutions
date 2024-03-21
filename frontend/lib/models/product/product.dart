@@ -12,6 +12,7 @@ class Product with _$Product {
     required double percentage,
     required int amount,
     required String description,
+    required String currency,
   }) = _Product;
 
   factory Product.fromJson(Map<String, Object?> json) =>
