@@ -11,7 +11,7 @@ class ProductRepository {
       final response =
           await http.get(Uri.parse('${AppConstants.backendUrl}/products'));
 
-      if (response.statusCode == 400) {
+      if (response.statusCode == 200) {
         final jsonBody = jsonDecode(response.body);
         return Products.fromJson(jsonBody);
       } else {
@@ -28,7 +28,7 @@ class ProductRepository {
       final response =
           await http.get(Uri.parse('${AppConstants.backendUrl}/products/$id'));
 
-      if (response.statusCode == 400) {
+      if (response.statusCode == 200) {
         final jsonBody = jsonDecode(response.body);
         return Product.fromJson(jsonBody);
       } else {

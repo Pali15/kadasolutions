@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/bloc/product_event.dart';
+import 'package:frontend/repositories/product_repository.dart';
 import 'package:go_router/go_router.dart';
 
+import '../bloc/product_bloc.dart';
 import '../screens/feed.dart';
 import '../screens/product.dart';
 import '../screens/products.dart';
@@ -11,7 +15,8 @@ import 'routes.dart';
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-  static final _builder = RoutesBuilder();
+  static final _builder =
+      RoutesBuilder(productBloc: ProductBloc(ProductRepository()));
 
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.feed,
@@ -64,6 +69,10 @@ class AppRouter {
 }
 
 class RoutesBuilder {
+  late final ProductBloc productBloc;
+
+  RoutesBuilder({required this.productBloc});
+
   Widget feedBuilder(
     BuildContext context,
     GoRouterState state,
@@ -75,7 +84,10 @@ class RoutesBuilder {
     BuildContext context,
     GoRouterState state,
   ) {
-    return const ProductsScreen();
+    return BlocProvider.value(
+      value: productBloc..add(const LoadProductsEvent()),
+      child: const ProductsScreen(),
+    );
   }
 
   Widget productBuilder(
@@ -83,7 +95,10 @@ class RoutesBuilder {
     GoRouterState state,
   ) {
     final id = (state.extra as Map<String, dynamic>)['id'];
-    return ProductScreen(id: int.parse(id));
+    return BlocProvider.value(
+      value: productBloc..add(LoadProductEvent(id)),
+      child: const ProductScreen(),
+    );
   }
 
   Widget profileBuilder(
