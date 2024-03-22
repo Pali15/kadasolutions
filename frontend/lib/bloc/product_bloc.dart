@@ -9,6 +9,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<LoadProductEvent>(
       (event, emit) async {
         try {
+          emit(const ProductBlocLoadingState());
           final result = await _repository.getProduct(id: event.id);
           emit(ProductBlocLoadedProduct(result));
         } catch (e) {
@@ -23,6 +24,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<LoadProductsEvent>(
       (event, emit) async {
         try {
+          emit(const ProductBlocLoadingState());
           final result = await _repository.getProducts();
           emit(ProductBlocLoadedProducts(result));
         } catch (e) {

@@ -27,6 +27,9 @@ mixin _$Product {
   int get amount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
+  String get coverImageUrl => throw _privateConstructorUsedError;
+  List<String> get otherImagesUrls => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +48,10 @@ abstract class $ProductCopyWith<$Res> {
       double percentage,
       int amount,
       String description,
-      String currency});
+      String currency,
+      String imageUrl,
+      String coverImageUrl,
+      List<String> otherImagesUrls});
 }
 
 /// @nodoc
@@ -68,6 +74,9 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? amount = null,
     Object? description = null,
     Object? currency = null,
+    Object? imageUrl = null,
+    Object? coverImageUrl = null,
+    Object? otherImagesUrls = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -98,6 +107,18 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverImageUrl: null == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      otherImagesUrls: null == otherImagesUrls
+          ? _value.otherImagesUrls
+          : otherImagesUrls // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -116,7 +137,10 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       double percentage,
       int amount,
       String description,
-      String currency});
+      String currency,
+      String imageUrl,
+      String coverImageUrl,
+      List<String> otherImagesUrls});
 }
 
 /// @nodoc
@@ -137,6 +161,9 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? amount = null,
     Object? description = null,
     Object? currency = null,
+    Object? imageUrl = null,
+    Object? coverImageUrl = null,
+    Object? otherImagesUrls = null,
   }) {
     return _then(_$ProductImpl(
       id: null == id
@@ -167,6 +194,18 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverImageUrl: null == coverImageUrl
+          ? _value.coverImageUrl
+          : coverImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      otherImagesUrls: null == otherImagesUrls
+          ? _value._otherImagesUrls
+          : otherImagesUrls // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -181,7 +220,11 @@ class _$ProductImpl implements _Product {
       required this.percentage,
       required this.amount,
       required this.description,
-      required this.currency});
+      required this.currency,
+      required this.imageUrl,
+      required this.coverImageUrl,
+      required final List<String> otherImagesUrls})
+      : _otherImagesUrls = otherImagesUrls;
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
@@ -200,10 +243,21 @@ class _$ProductImpl implements _Product {
   final String description;
   @override
   final String currency;
+  @override
+  final String imageUrl;
+  @override
+  final String coverImageUrl;
+  final List<String> _otherImagesUrls;
+  @override
+  List<String> get otherImagesUrls {
+    if (_otherImagesUrls is EqualUnmodifiableListView) return _otherImagesUrls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_otherImagesUrls);
+  }
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, price: $price, percentage: $percentage, amount: $amount, description: $description, currency: $currency)';
+    return 'Product(id: $id, title: $title, price: $price, percentage: $percentage, amount: $amount, description: $description, currency: $currency, imageUrl: $imageUrl, coverImageUrl: $coverImageUrl, otherImagesUrls: $otherImagesUrls)';
   }
 
   @override
@@ -220,13 +274,29 @@ class _$ProductImpl implements _Product {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.currency, currency) ||
-                other.currency == currency));
+                other.currency == currency) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.coverImageUrl, coverImageUrl) ||
+                other.coverImageUrl == coverImageUrl) &&
+            const DeepCollectionEquality()
+                .equals(other._otherImagesUrls, _otherImagesUrls));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, price, percentage, amount, description, currency);
+      runtimeType,
+      id,
+      title,
+      price,
+      percentage,
+      amount,
+      description,
+      currency,
+      imageUrl,
+      coverImageUrl,
+      const DeepCollectionEquality().hash(_otherImagesUrls));
 
   @JsonKey(ignore: true)
   @override
@@ -250,7 +320,10 @@ abstract class _Product implements Product {
       required final double percentage,
       required final int amount,
       required final String description,
-      required final String currency}) = _$ProductImpl;
+      required final String currency,
+      required final String imageUrl,
+      required final String coverImageUrl,
+      required final List<String> otherImagesUrls}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
@@ -268,6 +341,12 @@ abstract class _Product implements Product {
   String get description;
   @override
   String get currency;
+  @override
+  String get imageUrl;
+  @override
+  String get coverImageUrl;
+  @override
+  List<String> get otherImagesUrls;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>

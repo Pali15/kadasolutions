@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class RouteWrapper extends StatefulWidget {
   final Widget child;
   final void Function()? onInit;
-  const RouteWrapper({required this.child, this.onInit, super.key});
+  final void Function()? onDispose;
+  const RouteWrapper(
+      {required this.child, this.onInit, this.onDispose, super.key});
 
   @override
   State<RouteWrapper> createState() => _RouteWrapperState();
@@ -15,6 +17,15 @@ class _RouteWrapperState extends State<RouteWrapper> {
     super.initState();
     if (widget.onInit != null) {
       widget.onInit!();
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (widget.onDispose != null) {
+      widget.onDispose!();
     }
   }
 

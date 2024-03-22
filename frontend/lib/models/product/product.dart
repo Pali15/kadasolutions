@@ -13,6 +13,9 @@ class Product with _$Product {
     required int amount,
     required String description,
     required String currency,
+    required String imageUrl,
+    required String coverImageUrl,
+    required List<String> otherImagesUrls,
   }) = _Product;
 
   factory Product.fromJson(Map<String, Object?> json) =>

@@ -103,6 +103,7 @@ class RoutesBuilder {
     final id = (state.extra as Map<String, dynamic>)['id'];
     return RouteWrapper(
       onInit: () => productBloc.add(LoadProductEvent(id)),
+      onDispose: () => productBloc.add(const LoadProductsEvent()),
       child: BlocProvider.value(
         value: productBloc,
         child: const ProductScreen(),

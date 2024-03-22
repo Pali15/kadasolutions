@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/router/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../bloc/product_bloc.dart';
 import '../bloc/product_state.dart';
@@ -27,7 +28,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       appBar: AppBar(
         title: Text(
           'Products',
-          style: TextStyle(
+          style: GoogleFonts.roboto(
               fontSize: 24.sp,
               fontWeight: FontWeight.w600,
               color: Colors.black),
@@ -101,21 +102,23 @@ class _ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
-            'https://flutter.github.io/assets-for-api-docs/assets/widgets/falcon.jpg',
-            fit: BoxFit.fitWidth,
+            product.imageUrl,
+            fit: BoxFit.cover,
+            height: 200.h,
           ),
           Padding(
             padding: EdgeInsets.only(left: 12.w, top: 8.h),
             child: Text(
               product.title,
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+              style: GoogleFonts.roboto(
+                  fontSize: 16.sp, fontWeight: FontWeight.w600),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 12.w, top: 4.h),
             child: Text(
               '${product.currency}${product.price}',
-              style: TextStyle(
+              style: GoogleFonts.roboto(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   color: const Color.fromRGBO(9, 93, 158, 1)),
@@ -125,7 +128,8 @@ class _ProductCard extends StatelessWidget {
             padding: EdgeInsets.only(left: 12.w, top: 4.h),
             child: Text(
               '${product.percentage}% • ${product.amount} left',
-              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
+              style: GoogleFonts.roboto(
+                  fontSize: 12.sp, fontWeight: FontWeight.w400),
             ),
           ),
         ],
