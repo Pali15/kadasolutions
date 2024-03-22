@@ -86,7 +86,7 @@ class _ProductDetails extends StatelessWidget {
                   height: verticalSpacing,
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 200.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: product.otherImagesUrls.length,
@@ -94,11 +94,11 @@ class _ProductDetails extends StatelessWidget {
                       padding: EdgeInsets.only(right: 12.w),
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(ScreenUtil().radius(10)),
+                          Radius.circular(10.r),
                         ),
                         child: Image.network(
                           product.otherImagesUrls[index],
-                          width: 200,
+                          width: 200.w,
                           fit: BoxFit.cover,
                         ),
                       ),

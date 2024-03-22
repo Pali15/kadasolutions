@@ -128,8 +128,7 @@ class _ProductCard extends StatelessWidget {
             padding: EdgeInsets.only(left: 12.w, top: 4.h),
             child: Text(
               '${product.percentage}% • ${product.amount} left',
-              style: GoogleFonts.roboto(
-                  fontSize: 12.sp, fontWeight: FontWeight.w400),
+              style: GoogleFonts.roboto(fontSize: 12.sp),
             ),
           ),
         ],
