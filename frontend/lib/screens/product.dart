@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../bloc/product_bloc.dart';
-import '../bloc/product_state.dart';
+import '../bloc/product_bloc/product_bloc.dart';
+import '../bloc/product_bloc/product_state.dart';
 import '../models/product/product.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -16,15 +16,15 @@ class ProductScreen extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
-            if (state is ProductBlocLoadingState) {
+            if (state is ProductLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is ProductBlocErrorState) {
+            } else if (state is ProductErrorState) {
               return Center(
                 child: Text(state.errorMessage),
               );
-            } else if (state is ProductBlocLoadedProduct) {
+            } else if (state is ProductLoadedState) {
               return _ProductDetails(product: state.product);
             }
 
@@ -39,7 +39,7 @@ class ProductScreen extends StatelessWidget {
 class _ProductDetails extends StatelessWidget {
   final Product product;
 
-  const _ProductDetails({required this.product, super.key});
+  const _ProductDetails({required this.product});
 
   @override
   Widget build(BuildContext context) {

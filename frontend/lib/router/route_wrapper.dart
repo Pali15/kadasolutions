@@ -22,7 +22,6 @@ class _RouteWrapperState extends State<RouteWrapper> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     if (widget.onDispose != null) {
       widget.onDispose!();

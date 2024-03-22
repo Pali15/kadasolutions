@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/bloc/product_event.dart';
+import 'package:frontend/bloc/products_bloc/products_bloc.dart';
 import 'package:frontend/repositories/product_repository.dart';
 import 'package:frontend/router/route_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
-import '../bloc/product_bloc.dart';
+import '../bloc/product_bloc/product_bloc.dart';
+import '../bloc/product_bloc/product_event.dart';
+import '../bloc/products_bloc/products_event.dart';
 import '../screens/feed.dart';
 import '../screens/product.dart';
 import '../screens/products.dart';
@@ -15,9 +17,11 @@ import 'routes.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-
-  static final _builder =
-      RoutesBuilder(productBloc: ProductBloc(ProductRepository()));
+  static final ProductRepository repository = ProductRepository();
+  static final _builder = RoutesBuilder(
+    productBloc: ProductBloc(repository),
+    productsBloc: ProductsBloc(repository),
+  );
 
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.feed,
@@ -71,8 +75,9 @@ class AppRouter {
 
 class RoutesBuilder {
   late final ProductBloc productBloc;
+  late final ProductsBloc productsBloc;
 
-  RoutesBuilder({required this.productBloc});
+  RoutesBuilder({required this.productBloc, required this.productsBloc});
 
   Widget feedBuilder(
     BuildContext context,
@@ -88,9 +93,9 @@ class RoutesBuilder {
     GoRouterState state,
   ) {
     return RouteWrapper(
-      onInit: () => productBloc.add(const LoadProductsEvent()),
+      onInit: () => productsBloc.add(const LoadProductsEvent()),
       child: BlocProvider.value(
-        value: productBloc,
+        value: productsBloc,
         child: const ProductsScreen(),
       ),
     );
@@ -103,7 +108,6 @@ class RoutesBuilder {
     final id = (state.extra as Map<String, dynamic>)['id'];
     return RouteWrapper(
       onInit: () => productBloc.add(LoadProductEvent(id)),
-      onDispose: () => productBloc.add(const LoadProductsEvent()),
       child: BlocProvider.value(
         value: productBloc,
         child: const ProductScreen(),

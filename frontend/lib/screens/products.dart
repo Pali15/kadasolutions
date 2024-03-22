@@ -7,8 +7,8 @@ import 'package:frontend/router/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../bloc/product_bloc.dart';
-import '../bloc/product_state.dart';
+import '../bloc/products_bloc/products_bloc.dart';
+import '../bloc/products_bloc/products_state.dart';
 import '../models/product/product.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -48,17 +48,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ),
       ),
-      body: BlocBuilder<ProductBloc, ProductState>(
+      body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
-          if (state is ProductBlocLoadingState) {
+          if (state is ProductsLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is ProductBlocErrorState) {
+          } else if (state is ProductsErrorState) {
             return Center(
               child: Text(state.errorMessage),
             );
-          } else if (state is ProductBlocLoadedProducts) {
+          } else if (state is ProductsLoadedState) {
             final items = state.products.products;
             return Padding(
               padding: EdgeInsets.only(top: 12.h),
@@ -117,7 +117,7 @@ class _ProductCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 12.w, top: 4.h),
             child: Text(
-              '${product.currency}${product.price}',
+              '${product.currency}${product.price.toStringAsFixed(0)}',
               style: GoogleFonts.roboto(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
