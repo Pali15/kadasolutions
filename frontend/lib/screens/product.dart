@@ -106,7 +106,7 @@ class _ProductDetails extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: product.otherImagesUrls.length,
                     itemBuilder: (context, index) => Padding(
-                      padding: EdgeInsets.only(right: 12.w),
+                      padding: EdgeInsets.only(right: 20.w),
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.r),
