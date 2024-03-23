@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../bloc/product_bloc/product_bloc.dart';
@@ -48,7 +49,21 @@ class _ProductDetails extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Image.network(product.coverImageUrl),
+          Stack(
+            children: [
+              Image.network(product.coverImageUrl),
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    splashRadius: 10,
+                    onPressed: () => context.pop(),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    )),
+              ),
+            ],
+          ),
           Padding(
             padding: EdgeInsets.only(left: sidePadding),
             child: Column(
