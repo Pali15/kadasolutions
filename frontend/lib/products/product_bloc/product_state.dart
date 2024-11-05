@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../models/product/product.dart';
+import '../product_model/product.dart';
 
 part 'product_state.freezed.dart';
 

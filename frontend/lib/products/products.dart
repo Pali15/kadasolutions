@@ -7,9 +7,9 @@ import 'package:frontend/router/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../bloc/products_bloc/products_bloc.dart';
-import '../bloc/products_bloc/products_state.dart';
-import '../models/product/product.dart';
+import 'products_bloc/products_bloc.dart';
+import 'products_bloc/products_state.dart';
+import 'product_model/product.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});

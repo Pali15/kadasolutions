@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../bloc/product_bloc/product_bloc.dart';
-import '../bloc/product_bloc/product_state.dart';
-import '../models/product/product.dart';
+import 'product_bloc/product_bloc.dart';
+import 'product_bloc/product_state.dart';
+import 'product_model/product.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});

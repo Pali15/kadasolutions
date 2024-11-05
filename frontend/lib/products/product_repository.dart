@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:frontend/constants.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/product/product.dart';
+import 'product_model/product.dart';
 
 class ProductRepository {
   Future<Products> getProducts() async {
