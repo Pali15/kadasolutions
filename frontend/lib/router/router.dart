@@ -1,76 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/bloc/products_bloc/products_bloc.dart';
-import 'package:frontend/repositories/product_repository.dart';
+import 'package:frontend/products/products_bloc/products_bloc.dart';
 import 'package:frontend/router/route_wrapper.dart';
 import 'package:go_router/go_router.dart';
 
-import '../bloc/product_bloc/product_bloc.dart';
-import '../bloc/product_bloc/product_event.dart';
-import '../bloc/products_bloc/products_event.dart';
-import '../screens/feed.dart';
-import '../screens/product.dart';
-import '../screens/products.dart';
-import '../screens/profile.dart';
+import '../products/product_bloc/product_bloc.dart';
+import '../products/product_bloc/product_event.dart';
+import '../products/products_bloc/products_event.dart';
+import '../feed/feed.dart';
+import '../products/product.dart';
+import '../products/products.dart';
+import '../profile/profile.dart';
 import '../widgets/navbar.dart';
 import 'routes.dart';
 
 class AppRouter {
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final ProductRepository repository = ProductRepository();
-  static final _builder = RoutesBuilder(
-    productBloc: ProductBloc(repository),
-    productsBloc: ProductsBloc(repository),
-  );
+  final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-  static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.feed,
-    navigatorKey: _rootNavigatorKey,
-    debugLogDiagnostics: true,
-    routes: <RouteBase>[
-      StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => BottomNavBar(
-          navigationShell: navigationShell,
+  late final RoutesBuilder _builder;
+  late final GoRouter _router;
+
+  GoRouter get router => _router;
+
+  AppRouter(RoutesBuilder builder) {
+    _builder = builder;
+    _router = GoRouter(
+      initialLocation: AppRoutes.feed,
+      navigatorKey: _rootNavigatorKey,
+      debugLogDiagnostics: true,
+      routes: <RouteBase>[
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, navigationShell) => BottomNavBar(
+            navigationShell: navigationShell,
+          ),
+          branches: <StatefulShellBranch>[
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: AppRoutes.feed,
+                  name: AppRoutes.feed,
+                  builder: _builder.feedBuilder,
+                )
+              ],
+            ),
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: AppRoutes.products,
+                  name: AppRoutes.products,
+                  builder: _builder.productsBuilder,
+                  routes: [
+                    GoRoute(
+                      path: AppRoutes.product,
+                      name: AppRoutes.product,
+                      builder: _builder.productBuilder,
+                    ),
+                  ],
+                )
+              ],
+            ),
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: AppRoutes.profile,
+                  name: AppRoutes.profile,
+                  builder: _builder.profileBuilder,
+                )
+              ],
+            ),
+          ],
         ),
-        branches: <StatefulShellBranch>[
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.feed,
-                name: AppRoutes.feed,
-                builder: _builder.feedBuilder,
-              )
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.products,
-                name: AppRoutes.products,
-                builder: _builder.productsBuilder,
-                routes: [
-                  GoRoute(
-                    path: AppRoutes.product,
-                    name: AppRoutes.product,
-                    builder: _builder.productBuilder,
-                  ),
-                ],
-              )
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRoutes.profile,
-                name: AppRoutes.profile,
-                builder: _builder.profileBuilder,
-              )
-            ],
-          ),
-        ],
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
 
 class RoutesBuilder {

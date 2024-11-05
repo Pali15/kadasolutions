@@ -1,4 +1,4 @@
-import 'package:frontend/models/product/product.dart';
+import 'package:frontend/products/product_model/product.dart';
 
 final productList = [
   const Product(

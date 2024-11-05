@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'product_bloc/product_bloc.dart';
 import 'product_bloc/product_state.dart';
@@ -23,7 +22,10 @@ class ProductScreen extends StatelessWidget {
               );
             } else if (state is ProductErrorState) {
               return Center(
-                child: Text(state.errorMessage),
+                child: Text(
+                  state.errorMessage,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               );
             } else if (state is ProductLoadedState) {
               return _ProductDetails(product: state.product);
@@ -75,8 +77,7 @@ class _ProductDetails extends StatelessWidget {
                 ),
                 Text(
                   'Description',
-                  style: GoogleFonts.roboto(
-                      fontSize: 24.sp, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(
                   height: verticalSpacing,
@@ -85,8 +86,7 @@ class _ProductDetails extends StatelessWidget {
                   padding: EdgeInsets.only(right: sidePadding),
                   child: Text(
                     product.description,
-                    style: GoogleFonts.roboto(
-                        fontSize: 16.sp, fontWeight: FontWeight.w400),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 SizedBox(
@@ -94,8 +94,7 @@ class _ProductDetails extends StatelessWidget {
                 ),
                 Text(
                   'Images',
-                  style: GoogleFonts.roboto(
-                      fontSize: 24.sp, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(
                   height: verticalSpacing,

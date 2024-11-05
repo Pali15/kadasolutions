@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/bloc/product_bloc/product_bloc.dart';
-import 'package:frontend/bloc/product_bloc/product_event.dart';
-import 'package:frontend/bloc/product_bloc/product_state.dart';
-import 'package:frontend/repositories/product_repository.dart';
+import 'package:frontend/products/product_bloc/product_bloc.dart';
+import 'package:frontend/products/product_bloc/product_event.dart';
+import 'package:frontend/products/product_bloc/product_state.dart';
+import 'package:frontend/products/product_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'fixtures.dart';
